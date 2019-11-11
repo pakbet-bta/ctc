@@ -6,6 +6,7 @@ pragma solidity ^0.5.0;
 */
 contract Ownable {
   address private _owner;
+  address payable _ownerPayable;
 
   event OwnershipTransferred(
     address indexed previousOwner,
@@ -18,6 +19,7 @@ contract Ownable {
   */
   constructor() internal {
     _owner = msg.sender;
+    _ownerPayable = msg.sender;
     emit OwnershipTransferred(address(0), _owner);
   }
 
@@ -26,6 +28,13 @@ contract Ownable {
   */
   function owner() public view returns(address) {
     return _owner;
+  }
+ 
+ /**
+  * @return the payable address of the owner to comply with compiler ^0.5.0.
+  */
+  function ownerPayable() public view returns(address payable) {
+    return _ownerPayable;
   }
 
   /**
